@@ -78,7 +78,7 @@ export default function App() {
             }
           />
           <Route
-            path="/certificate/:courseName"
+            path="/certificate/:id"
             element={
               <ProtectedRoute>
                 <Certificate />
