@@ -8,6 +8,10 @@ dotenv.config();
 
 const app = express();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+app.use(
+  "/stripe/webhook",
+  express.raw({ type: "application/json" })
+);
 
 app.use(
   cors({
