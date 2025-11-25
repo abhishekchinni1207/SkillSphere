@@ -14,6 +14,11 @@ app.use(
 );
 
 app.use(
+  "/stripe/webhook",
+  express.raw({ type: "application/json" })
+);
+
+app.use(
   cors({
     origin: process.env.FRONTEND_URL || "http://localhost:5173",
     credentials: true,

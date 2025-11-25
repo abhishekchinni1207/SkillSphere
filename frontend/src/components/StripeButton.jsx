@@ -1,4 +1,5 @@
 import axios from "axios";
+import { API_BASE_URL } from "../config/api";
 import React, { useState } from "react";
 
 // eslint-disable-next-line no-unused-vars
@@ -15,7 +16,7 @@ export default function StripeButton({ courseId, amount, onSuccess }) {
     setLoading(true);
 
     try {
-      const res = await axios.post("http://localhost:5000/stripe/create-checkout-session", {
+      const res = await axios.post(`${API_BASE_URL}/stripe/create-checkout-session`, {
         courseId,
         amount,
         userId: user.id,
