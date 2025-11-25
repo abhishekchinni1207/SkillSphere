@@ -1,12 +1,11 @@
 import axios from "axios";
-import { API_BASE_URL } from "../config/api";
 import React, { useState } from "react";
 
 // eslint-disable-next-line no-unused-vars
 export default function StripeButton({ courseId, amount, onSuccess }) {
   const user = JSON.parse(localStorage.getItem("user"));
   const [loading, setLoading] = useState(false);
-
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
   const handleCheckout = async () => {
     if (!user) {
       alert("Please log in before purchasing a course.");

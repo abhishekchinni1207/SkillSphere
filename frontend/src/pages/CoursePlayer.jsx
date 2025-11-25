@@ -7,7 +7,7 @@ export default function CoursePlayer() {
   const { id } = useParams(); 
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
-
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
   const [course, setCourse] = useState(null);
   const [lessons, setLessons] = useState([]);
   const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
@@ -20,9 +20,9 @@ export default function CoursePlayer() {
     const fetchData = async () => {
       try {
         const [courseRes, lessonRes, progressRes] = await Promise.all([
-          axios.get(`http://localhost:5000/courses/${id}`),
-          axios.get(`http://localhost:5000/lessons/${id}`),
-          axios.get(`http://localhost:5000/progress/${user.id}/${id}`),
+          axios.get(`${API_BASE_URL}/courses/${id}`),
+          axios.get(`${API_BASE_URL}/lessons/${id}`),
+          axios.get(`${API_BASE_URL}/progress/${user.id}/${id}`),
         ]);
 
         setCourse(courseRes.data);
@@ -59,7 +59,7 @@ export default function CoursePlayer() {
     const newPercent = Math.min(((nextIndex + 1) / total) * 100, 100);
 
     try {
-      await axios.post("http://localhost:5000/progress/update", {
+      await axios.post(`${API_BASE_URL}/progress/update`, {
         userId: user.id,
         courseId: id,
         percent: newPercent,
@@ -83,7 +83,7 @@ export default function CoursePlayer() {
     triggerConfetti();
 
     try {
-      await axios.post("http://localhost:5000/progress/update", {
+      await axios.post(`${API_BASE_URL}/progress/update`, {
         userId: user.id,
         courseId: id,
         percent: 100,
@@ -91,7 +91,7 @@ export default function CoursePlayer() {
 
       const certUrl = `${window.location.origin}/certificate/${id}`;
 
-      await axios.post("http://localhost:5000/certificate/issue", {
+      await axios.post(`${API_BASE_URL}/certificate/issue`, {
         userId: user.id,
         courseId: id,
         certificateUrl: certUrl,

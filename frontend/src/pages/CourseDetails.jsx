@@ -8,11 +8,11 @@ export default function CourseDetails() {
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
   const user = JSON.parse(localStorage.getItem("user") || "null");
-
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/courses/${id}`);
+        const res = await axios.get(`${API_BASE_URL}/${id}`);
         setCourse(res.data);
       } catch (err) {
         console.error("Error fetching course:", err);

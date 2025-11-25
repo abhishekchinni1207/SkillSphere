@@ -1,6 +1,5 @@
 import { useState } from "react";
 import axios from "axios";
-import { API_BASE_URL } from "../config/api";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -8,7 +7,7 @@ export default function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
