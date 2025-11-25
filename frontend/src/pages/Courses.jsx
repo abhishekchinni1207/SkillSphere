@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_BASE_URL } from "../config/api";
 import { Link } from "react-router-dom";
 
 export default function Courses() {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
   useEffect(() => {
     const fetchCourses = async () => {
       try {
